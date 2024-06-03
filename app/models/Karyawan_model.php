@@ -17,16 +17,16 @@ class Karyawan_model {
 
     public function getKaryawanById($id)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id=:id');
+        $this->db->query('SELECT * FROM ' . $this->table . ' JOIN golongan ON karyawan.id = :id');
         $this->db->bind('id', $id);
         return $this->db->single();
     }
 
     public function tambahDataKaryawan($data)
     {
-        $query = "INSERT INTO " . $this->table . " 
+        $query = "INSERT INTO " . $this->table . " (nip, nik, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, whatsapp, alamat, golongan_id)
                     VALUES
-                  ('', :nip, :nik, :nama, :jenis_kelamin, :tempat_lahir, :tanggal_lahir, :whatsapp, :alamat, :golongan_id)";
+                  (:nip, :nik, :nama, :jenis_kelamin, :tempat_lahir, :tanggal_lahir, :whatsapp, :alamat, :golongan_id)";
         
         $this->db->query($query);
         $this->db->bind('nip', $data['nip']);
@@ -37,9 +37,6 @@ class Karyawan_model {
         $this->db->bind('whatsapp', $data['whatsapp']);
         $this->db->bind('alamat', $data['alamat']);
         $this->db->bind('golongan_id', $data['golongan_id']);
-        $this->db->bind('id', $data['id']);
-
-
         $this->db->execute();
 
         return $this->db->rowCount();
@@ -72,6 +69,7 @@ class Karyawan_model {
                   WHERE id = :id";
         
                   $this->db->query($query);
+                  $this->db->bind('id', $data['id']);
                   $this->db->bind('nip', $data['nip']);
                   $this->db->bind('nik', $data['nik']);
                   $this->db->bind('nama', $data['nama']);
@@ -80,7 +78,6 @@ class Karyawan_model {
                   $this->db->bind('whatsapp', $data['whatsapp']);
                   $this->db->bind('alamat', $data['alamat']);
                   $this->db->bind('golongan_id', $data['golongan_id']);
-                  $this->db->bind('id', $data['id']);
 
         $this->db->execute();
 
@@ -97,4 +94,8 @@ class Karyawan_model {
         return $this->db->resultSet();
     }
 
+    public function getAllGolongan(){
+        $this->db->query('SELECT * FROM ' . "golongan");
+        return $this->db->resultSet();
+    }
 }

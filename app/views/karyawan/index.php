@@ -62,11 +62,12 @@
                                     <input type="text" name="alamat" class="form-control" id="alamat">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Golongan id:</label>                                    <select class="form-control" name="golongan_id" id="golongan_id">
+                                    <label for="recipient-name" class="col-form-label">Golongan id:</label>                                   
                                     <select class="form-control" name="golongan_id" id="golongan_id">
-                                        <?php foreach ($data['krw'] as $item): ?>
-                                        <option value="<?= $item["id"] ?>"><?= $item["nama_golongan"] ?></option>
-                                        <?php endforeach; ?>
+                                        <option value="1000000">1000000</option>
+                                        <option value="2000000">2000000</option>
+                                        <option value="3000000">3000000</option>
+                                        <option value="4000000">4000000</option>
                                     </select>
 
                                 </div>
@@ -97,7 +98,7 @@
             <tbody>
     <?php foreach ($data['krw'] as $gol) : ?>
         <tr>
-            <td><?= $gol['nama_golongan']; ?></td>
+            <td><?= $gol['nama']; ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <a href="<?= BASEURL; ?>/karyawan/detail/<?= $krw['id']; ?>" class="btn btn-primary me-2">Detail</a>
